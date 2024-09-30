@@ -1,0 +1,16 @@
+{
+    "manifest_version": 3,
+    "name": "History Cleaner",
+    "version": "1.0",
+    "permissions": [
+      "history"
+    ],
+    "action": {
+      "default_popup": "popup.html",
+      "default_title": "Clean Your History"
+    },
+    "background": {
+      "service_worker": "background.js"
+    }
+  }
+  
