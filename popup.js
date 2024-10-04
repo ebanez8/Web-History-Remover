@@ -1,9 +1,24 @@
 document.getElementById('deleteButton').addEventListener('click', function() {
     const searchString = document.getElementById('searchString').value;
+    const startDate = document.getElementById('startDate').value;
+    const endDate = document.getElementById('endDate').value;
+
+    let startTime = new Date(startDate).getTime();
+    let endTime = new Date(endDate).getTime();
+
+
+    if (!endDate) {
+        endTime = Date.now();
+    }
+
 
     if (searchString) {
-        // Send the search string to the background script for processing
-        chrome.runtime.sendMessage({ action: 'deleteHistory', searchString: searchString }, function(response) {
+        chrome.runtime.sendMessage({
+            action: 'deleteHistory',
+            searchString: searchString,
+            startTime: startTime,
+            endTime: endTime
+        }, function(response) {
             if (response.success) {
                 alert('History entries containing "' + searchString + '" have been deleted.');
             } else {
